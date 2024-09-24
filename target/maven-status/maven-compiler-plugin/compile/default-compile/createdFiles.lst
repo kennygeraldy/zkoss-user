@@ -1,0 +1,4 @@
+com\fif\service\Impl\UserServiceImpl.class
+com\fif\service\UserService.class
+com\fif\controller\SearchController.class
+com\fif\entity\User.class

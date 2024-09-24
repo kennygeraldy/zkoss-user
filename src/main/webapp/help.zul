@@ -1,0 +1,107 @@
+<zk>
+    <style>
+        .borderlayout {
+        background-color: #f0f4f8;
+        border: 1px solid #00796b;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: white;
+        }
+
+        .north {
+        background-color: #00796b;
+        color: white;
+        padding: 15px;
+        font-size: 1.5rem;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        }
+
+        .south {
+        background-color: #00796b;
+        padding: 10px;
+        text-align: center;
+        }
+
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e0f7fa;
+        }
+
+        .sidebar {
+        background-color: #ffffff;
+        border-right: 1px solid #00796b;
+        padding: 10px;
+        }
+
+        .sidebar-label {
+        cursor: pointer;
+        font-weight: medium;
+        padding: 10px;
+        font-size: 1rem;
+        display: block;
+        }
+    </style>
+        <window title="HELP" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;">
+            <div style="display:flex; flex-direction: column;">
+
+            <listbox id="box" onClick='showAnswer(event)'>
+                <listhead sizable="true">
+                    <listheader label="Help Topics" sort="auto" />
+                </listhead>
+                <listitem>
+                    <listcell label="How to use the application?" />
+                </listitem>
+                <listitem>
+                    <listcell label="How to reset your password?" />
+                </listitem>
+                <listitem>
+                    <listcell label="How to contact support?" />
+                </listitem>
+                <listitem>
+                    <listcell label="How to manage your profile?" />
+                </listitem>
+                <listitem>
+                    <listcell label="How to report an issue?" />
+                </listitem>
+                <listitem>
+                    <listcell label="Frequently Asked Questions (FAQs)" />
+                </listitem>
+            </listbox>
+
+            <label id="answerLabel" value="" style="margin-top:5vh; font-weight: normal; color: #00695c;"/>
+            </div>
+        </window>
+
+    <zscript><![CDATA[
+        void showAnswer(Event event) {
+            Listbox listbox = (Listbox) event.getTarget();
+            Listitem item = listbox.getSelectedItem();
+            if (item != null) {
+                String answer = "";
+                switch (item.getIndex()) {
+                    case 0:
+                        answer = "To use the application, start by logging in with your credentials.";
+                        break;
+                    case 1:
+                        answer = "To reset your password, click on 'Forgot Password' on the login page.";
+                        break;
+                    case 2:
+                        answer = "You can contact support via email at support@example.com.";
+                        break;
+                    case 3:
+                        answer = "Manage your profile by navigating to the 'Profile' section in the settings.";
+                        break;
+                    case 4:
+                        answer = "To report an issue, use the 'Report' button in the application.";
+                        break;
+                    case 5:
+                        answer = "Check our FAQ section for common questions and answers.";
+                        break;
+                }
+                org.zkoss.zul.Label answerLabel = (org.zkoss.zul.Label) self.getFellow("answerLabel");
+                answerLabel.setValue(answer);
+            }
+        }
+    ]]></zscript>
+</zk>

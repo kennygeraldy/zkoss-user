@@ -1,0 +1,8 @@
+<zk>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm')@init('com.fif.MyViewModel')"
+            validationMessages="@id('vmsgs')">
+    </window>
+
+
+</zk>

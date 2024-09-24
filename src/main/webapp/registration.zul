@@ -1,0 +1,186 @@
+<!--<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>-->
+<?page title="Registration Form" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <style>
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e0f7fa;
+        }
+
+        .custom-icon-radio-male, .custom-icon-radio-female {
+        margin-right: 10px;
+        }
+
+        .window {
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border: 2px solid #00796b;
+        }
+
+        label {
+        font-weight: bold;
+        color: #00695c;
+        }
+
+        textbox, datebox, combobox, spinner {
+        border: 2px solid #ff8f00;
+        border-radius: 4px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        transition: border-color 0.3s;
+        }
+
+        textbox:focus, datebox:focus, combobox:focus, spinner:focus {
+        border-color: #f44336;
+        outline: none;
+        }
+
+        button {
+        background-color: #29b6f6;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        button:hover {
+        background-color: #0288d1;
+        }
+
+        .popup {
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .help-label {
+        cursor: pointer;
+        text-decoration: underline;
+        }
+
+        .custom-icon-radio-male {
+        color: blue;
+        }
+
+        .custom-icon-radio-female {
+        color: pink;
+        }
+    </style>
+<!--    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" self="@define(content)"> adding self define content to show the content in parent template-->
+    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;">
+        <grid>
+            <auxhead>
+                <auxheader label="Registration Form" colspan="2" iconSclass="z-icon-user-circle-o"/>
+            </auxhead>
+            <columns>
+                <column width="40%"/>
+                <column width="60%"/>
+            </columns>
+            <rows>
+                <row>
+                    <label value="Username:" />
+                    <textbox id="username" width="100%" constraint="no empty" onChange="checkForm()"/>
+                </row>
+                <row>
+                    <label value="Gender:" />
+                    <radiogroup id="gender">
+                        <radio label="Male" value="Male" iconSclass="z-icon-male custom-icon-radio-male"/>
+                        <radio label="Female" value="Female" iconSclass="z-icon-female custom-icon-radio-female"/>
+                    </radiogroup>
+                </row>
+                <row>
+                    <label value="Birthday:" />
+                    <datebox id="birthday" width="100%" constraint="no empty, no future, no today" onChange="checkForm()"/>
+                </row>
+                <row>
+                    <label value="Age:" />
+                    <spinner id="age" onChange="checkForm()" value="0" constraint="min 0"/>
+                </row>
+                <row>
+                    <label value="Roles:" />
+                    <combobox id="rolesCombobox" constraint="no empty">
+                        <comboitem label="Front-end Developer" />
+                        <comboitem label="Back-end Developer" />
+                        <comboitem label="Full-Stack Developer" />
+                    </combobox>
+                </row>
+                <row spans="2" align="right">
+                    <div>
+                        <checkbox id="acceptTerms" onCheck="changeSubmittedStatus()" disabled="true"/>
+                        <label value="Accept Term of Use (Click for detail)" popup="infoTerm" style="color: blue;" sclass="help-label"/>
+                    </div>
+                </row>
+                <row spans="2" align="right">
+                    <div>
+                        <label value="Help " popup="helpInfo" style="color: blue;" sclass="help-label"/>
+                        <label value="(Ctrl+h)" popup="helpInfo"/>
+                        <button id="resetButton" label="Reset" onClick="doReset()"/>
+                        <button id="submitButton" label="Submit" href="output-table.zul" disabled="true"/>
+                    </div>
+                </row>
+            </rows>
+        </grid>
+        <zscript><![CDATA[
+            public void doReset() {
+                username.setConstraint(null);
+                birthday.setConstraint(null);
+                rolesCombobox.setConstraint(null);
+
+                username.setValue("");
+                gender.setSelectedItem(null);
+                birthday.setValue(null);
+                acceptTerms.setChecked(false);
+                submitButton.setIconSclass("");
+                rolesCombobox.setSelectedItem(null);
+                age.setValue(0);
+
+                username.setConstraint("no empty");
+                birthday.setConstraint("no empty, no future, no today");
+
+                acceptTerms.setDisabled(true);
+                submitButton.setDisabled(true);
+            }
+
+            public void changeSubmittedStatus() {
+                boolean isChecked = acceptTerms.isChecked();
+                if (isChecked) {
+                    submitButton.setDisabled(false);
+                    submitButton.setIconSclass("z-icon-check");
+                } else {
+                    submitButton.setDisabled(true);
+                    submitButton.setIconSclass("");
+                }
+            }
+
+            public void checkForm() {
+                boolean isUsernameFilled = !username.getValue().isEmpty();
+                boolean isGenderSelected = gender.getSelectedItem() != null;
+                boolean isBirthdaySelected = birthday.getValue() != null;
+
+                if (isUsernameFilled && isGenderSelected && isBirthdaySelected) {
+                    acceptTerms.setDisabled(false);
+                } else {
+                    acceptTerms.setDisabled(true);
+                    acceptTerms.setChecked(false);
+                    submitButton.setDisabled(true);
+                    submitButton.setIconSclass("");
+                }
+            }
+        ]]></zscript>
+    </window>
+
+    <popup id="infoTerm" width="500px">
+        Ini Term Users:
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in qui officia deserunt mollit anim id est laborum.
+    </popup>
+    <popup id="helpInfo" width="500px">
+        Help Me:
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in qui officia deserunt mollit anim id est laborum.
+    </popup>
+</zk>
