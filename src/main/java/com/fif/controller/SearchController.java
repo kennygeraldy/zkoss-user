@@ -42,6 +42,10 @@ public class SearchController extends SelectorComposer<Component> {
 
     private UserService userService = new UserServiceImpl();
 
+    public SearchController(){
+        dataModel.addAll(userService.findAll());
+    }
+
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
