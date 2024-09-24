@@ -2,7 +2,7 @@ package com.fif.entity;
 
 public class User {
 
-    private long id;
+    private String id;
 
     private String username;
 
@@ -14,7 +14,7 @@ public class User {
 
     private String role;
 
-    public User(long id, String username, String gender, String birthday, Integer age, String role) {
+    public User(String id, String username, String gender, String birthday, Integer age, String role) {
         this.id = id;
         this.username = username;
         this.gender = gender;
@@ -23,7 +23,7 @@ public class User {
         this.role = role;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,7 +47,7 @@ public class User {
         this.role = role;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

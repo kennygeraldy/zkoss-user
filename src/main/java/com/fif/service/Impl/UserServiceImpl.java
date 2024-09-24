@@ -1,49 +1,27 @@
 package com.fif.service.Impl;
 
 import com.fif.entity.User;
+import com.fif.repository.UserRepository;
 import com.fif.service.UserService;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class UserServiceImpl implements UserService {
 
-    private List<User> userList = new LinkedList<User>();
-
-    private int id = 1;
+    private UserRepository userRepository;
 
     public UserServiceImpl() {
-        userList.add(
-                new User(id++,
-                        "KGeraldy",
-                        "male",
-                        "2001-26-11",
-                        22,
-                        "Front-End Developer"));
-        userList.add(
-                new User(id++,
-                        "JBond",
-                        "male",
-                        "2000-26-08",
-                        24,
-                        "Back-End Developer"));
-        userList.add(
-                new User(id++,
-                        "KelvinsC",
-                        "male",
-                        "1998-28-01",
-                        26,
-                        "Full-Stack Developer"));
-
-
+        this.userRepository = new UserRepository();
     }
 
+    @Override
     public List<User> findAll() {
-        return userList;
+        return userRepository.findAll();
     }
 
     public List<User> search(String keyword) {
         List<User> result = new LinkedList<User>();
+        List<User> userList = userRepository.findAll();
         if(keyword==null || "".equals(keyword)) {
             result = userList;
         } else {
@@ -55,4 +33,16 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
+    @Override
+    public void deleteUser(String userId) {
+        UserRepository.users.removeIf(user -> user.getId() == userId);
+    }
+
+    @Override
+    public void addUser(String username, String gender, String birthday, Integer age, String role) {
+        User newUser = new User(UUID.randomUUID().toString(), username, gender, birthday, age, role);
+        userRepository.addUser(newUser);
+    }
+
 }

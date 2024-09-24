@@ -70,37 +70,40 @@
         color: pink;
         }
     </style>
-        <window title="Users Booklet" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;" apply="com.fif.controller.SearchController">
-            <textbox id="keywordBox" width="85%" height="5vh" style="margin-right: 5px;margin-bottom: 2vh"/>
-            <button id="searchButton" label="Search" iconSclass="z-icon-search" height="5vh" style="margin-bottom: 2vh" />
-            <listbox id="userListbox" emptyMessage="No user found in the result">
-                <listhead sizable="true">
-                    <listheader label="Id" />
-                    <listheader label="Username" />
-                    <listheader label="Gender" />
-                    <listheader label="Birthday" />
-                    <listheader label="Age" />
-                    <listheader label="Role" />
-                </listhead>
-                <template name="model">
-                    <listitem>
-                        <listcell label="${each.id}" />
-                        <listcell label="${each.username}" />
-                        <listcell label="${each.gender}" />
-                        <listcell label="${each.birthday}" />
-                        <listcell label="${each.age}" />
-                        <listcell label="${each.role}" />
-                    </listitem>
-                </template>
-            </listbox>
-            <hlayout style="margin-top:20px; width:100%">
-                <vlayout hflex="1">
-                    <label id="usernameLabel" />
-                    <label id="genderLabel" />
-                    <label id="birthdayLabel" />
-                    <label id="ageLabel" />
-                    <label id="roleLabel" />
-                </vlayout>
-            </hlayout>
-        </window>
+    <window title="Users Booklet" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">
+        <textbox id="keywordBox" width="70%" height="5vh" style="margin-right: 5px; margin-bottom: 2vh;" value="@bind(vm.keyword)" />
+        <button id="searchButton" label="Search" iconSclass="z-icon-search" height="5vh" style="margin-bottom: 2vh;margin-right: 5px" onClick="@command('search')" />
+        <button id="deleteButton" label="Delete" iconSclass="z-icon-trash" height="5vh" style="margin-bottom: 2vh" onClick="@command('delete')" />
+
+        <listbox model="@bind(vm.userList)" emptyMessage="No user found in the result" selectedItem="@save(vm.selectedUser)">
+            <listhead sizable="true">
+                <listheader label="Id" />
+                <listheader label="Username" />
+                <listheader label="Gender" />
+                <listheader label="Birthday" />
+                <listheader label="Age" />
+                <listheader label="Role" />
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@load(each.id)" />
+                    <listcell label="@load(each.username)" />
+                    <listcell label="@load(each.gender)" />
+                    <listcell label="@load(each.birthday)" />
+                    <listcell label="@load(each.age)" />
+                    <listcell label="@load(each.role)" />
+                </listitem>
+            </template>
+        </listbox>
+
+        <hlayout style="margin-top:20px; width:100%">
+            <vlayout hflex="1">
+                <label value="@load(vm.selectedUser.username)" />
+                <label value="@load(vm.selectedUser.gender)" />
+                <label value="@load(vm.selectedUser.birthday)" />
+                <label value="@load(vm.selectedUser.age)" />
+                <label value="@load(vm.selectedUser.role)" />
+            </vlayout>
+        </hlayout>
+    </window>
 </zk>

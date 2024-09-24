@@ -73,7 +73,7 @@
         }
     </style>
 <!--    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" self="@define(content)"> adding self define content to show the content in parent template-->
-    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;">
+    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">
         <grid>
             <auxhead>
                 <auxheader label="Registration Form" colspan="2" iconSclass="z-icon-user-circle-o"/>
@@ -85,29 +85,29 @@
             <rows>
                 <row>
                     <label value="Username:" />
-                    <textbox id="username" width="100%" constraint="no empty" onChange="checkForm()"/>
+                    <textbox id="username" width="100%" constraint="no empty" value="@bind(vm.username)"/>
                 </row>
                 <row>
                     <label value="Gender:" />
-                    <radiogroup id="gender">
+                    <radiogroup id="gender" selectedItem="@bind(vm.gender)">
                         <radio label="Male" value="Male" iconSclass="z-icon-male custom-icon-radio-male"/>
                         <radio label="Female" value="Female" iconSclass="z-icon-female custom-icon-radio-female"/>
                     </radiogroup>
                 </row>
                 <row>
                     <label value="Birthday:" />
-                    <datebox id="birthday" width="100%" constraint="no empty, no future, no today" onChange="checkForm()"/>
+                    <datebox id="birthday" width="100%" constraint="no empty, no future, no today" onChange="checkForm()" value="@bind(vm.birthday)"/>
                 </row>
                 <row>
                     <label value="Age:" />
-                    <spinner id="age" onChange="checkForm()" value="0" constraint="min 0"/>
+                    <spinner id="age" onChange="checkForm()" value="@bind(vm.age)" constraint="min 0" />
                 </row>
                 <row>
                     <label value="Roles:" />
-                    <combobox id="rolesCombobox" constraint="no empty">
-                        <comboitem label="Front-end Developer" />
-                        <comboitem label="Back-end Developer" />
-                        <comboitem label="Full-Stack Developer" />
+                    <combobox id="rolesCombobox" constraint="no empty" selectedItem="@bind(vm.role)">
+                        <comboitem label="Front-End Developer" value="Front-End Developer"/>
+                        <comboitem label="Back-End Developer"  value="Back-End Developer" />
+                        <comboitem label="Full-Stack Developer"  value="Full-Stack Developer" />
                     </combobox>
                 </row>
                 <row spans="2" align="right">
@@ -121,7 +121,7 @@
                         <label value="Help " popup="helpInfo" style="color: blue;" sclass="help-label"/>
                         <label value="(Ctrl+h)" popup="helpInfo"/>
                         <button id="resetButton" label="Reset" onClick="doReset()"/>
-                        <button id="submitButton" label="Submit" href="output-table.zul" disabled="true"/>
+                        <button id="submitButton" label="Submit" onClick="@command('add')" disabled="true"/>
                     </div>
                 </row>
             </rows>
