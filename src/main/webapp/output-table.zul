@@ -23,7 +23,7 @@
         }
 
         textbox, datebox, combobox, spinner {
-        border: 2px solid #ff8f00;
+        border: 2px solid #4caf50;
         border-radius: 4px;
         padding: 10px;
         width: 100%;
@@ -33,22 +33,29 @@
         }
 
         textbox:focus, datebox:focus, combobox:focus, spinner:focus {
-        border-color: #f44336;
+        border-color: #2e7d32;
         outline: none;
         }
 
-        button {
-        background-color: #29b6f6;
+        .cta-button {
+        background-color: #00796b;
         color: white;
         border: none;
         border-radius: 4px;
         padding: 10px 15px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        button:hover {
-        background-color: #0288d1;
+        .cta-button:hover {
+        background-color: rgba(0, 121, 107, 0.8);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:active {
+        background-color: #004d40;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .popup {
@@ -63,27 +70,23 @@
         text-decoration: underline;
         }
 
-        .custom-icon-radio-male {
-        color: blue;
-        }
-
-        .custom-icon-radio-female {
-        color: pink;
+        .listhead {
+        background-color: #00796b;
         }
     </style>
     <window title="Users Booklet" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-right: 25vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')" self="@define(content)">
         <textbox id="keywordBox" width="70%" height="5vh" style="margin-right: 5px; margin-bottom: 2vh;" value="@bind(vm.keyword)" />
-        <button id="searchButton" label="Search" iconSclass="z-icon-search" height="5vh" style="margin-bottom: 2vh;margin-right: 5px" onClick="@command('search')" />
-        <button id="deleteButton" label="Delete" iconSclass="z-icon-trash" height="5vh" style="margin-bottom: 2vh" onClick="@command('delete')" />
+        <button sclass="cta-button" id="searchButton" label="Search" iconSclass="z-icon-search" height="5vh" style="margin-bottom: 2vh;margin-right: 5px" onClick="@command('search')" />
+        <button sclass="cta-button" id="deleteButton" label="Delete" iconSclass="z-icon-trash" height="5vh" style="margin-bottom: 2vh" onClick="@command('delete')" />
 
         <listbox model="@bind(vm.userList)" emptyMessage="No user found in the result" selectedItem="@save(vm.selectedUser)">
-            <listhead sizable="true">
-                <listheader label="Id" />
-                <listheader label="Username" />
-                <listheader label="Gender" />
-                <listheader label="Birthday" />
-                <listheader label="Age" />
-                <listheader label="Role" />
+            <listhead sizable="true" >
+                <listheader label="Id" sclass="listhead"/>
+                <listheader label="Username" sclass="listhead" />
+                <listheader label="Gender" sclass="listhead"/>
+                <listheader label="Birthday" sclass="listhead"/>
+                <listheader label="Age" sclass="listhead" />
+                <listheader label="Role" sclass="listhead" />
             </listhead>
             <template name="model">
                 <listitem>
@@ -99,17 +102,19 @@
 
         <hlayout style="margin-top:20px; width:100%">
             <vlayout hflex="1">
-                <div style="display:flex; justify-content:center; align-items: center; gap: 10px">
-                <label style="text-align: center; font-weight: bold;">Update User - </label>
-                    <label value="Username: " />
-                    <textbox value="@bind(vm.selectedUser.username)" />
-                    <label value="Age: " />
-                    <textbox value="@bind(vm.selectedUser.age)" />
-                    <label value="Role: " />
-                    <textbox value="@bind(vm.selectedUser.role)" />
-                    <label value="Birthday: " />
-                    <textbox value="@bind(vm.selectedUser.birthday)" />
-                    <button onClick="@command('update')">Update</button>
+                <div style="display:flex; flex-direction: column; gap: 15px; justify-content: center;">
+                    <label style="text-align: center; color: #00695c;">Update User</label>
+                    <div style="display:flex; justify-content:center; align-items: center; gap: 10px">
+                        <label value="Username: " />
+                        <textbox value="@bind(vm.selectedUser.username)" />
+                        <label value="Birthday: " />
+                        <datebox value="@bind(vm.selectedUser.birthday)" />
+                        <label value="Age: " />
+                        <textbox value="@bind(vm.selectedUser.age)" />
+                        <label value="Role: " />
+                        <textbox value="@bind(vm.selectedUser.role)" />
+                        <button sclass="cta-button" onClick="@command('update')">Update</button>
+                    </div>
                 </div>
             </vlayout>
         </hlayout>

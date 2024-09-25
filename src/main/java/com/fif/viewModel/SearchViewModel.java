@@ -8,6 +8,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.ListModelList;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class SearchViewModel {
 
     private String gender;
 
-    private String birthday;
+    private Date birthday;
 
     private Integer age;
 
@@ -104,7 +105,7 @@ public class SearchViewModel {
         return gender;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -132,7 +133,7 @@ public class SearchViewModel {
         this.gender = gender;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

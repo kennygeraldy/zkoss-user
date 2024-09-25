@@ -1,5 +1,7 @@
 package com.fif.entity;
 
+import java.util.Date;
+
 public class User {
 
     private String id;
@@ -8,13 +10,13 @@ public class User {
 
     private String gender;
 
-    private String birthday;
+    private Date birthday;
 
     private Integer age;
 
     private String role;
 
-    public User(String id, String username, String gender, String birthday, Integer age, String role) {
+    public User(String id, String username, String gender, Date birthday, Integer age, String role) {
         this.id = id;
         this.username = username;
         this.gender = gender;
@@ -35,7 +37,7 @@ public class User {
         this.gender = gender;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -59,7 +61,7 @@ public class User {
         return gender;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 

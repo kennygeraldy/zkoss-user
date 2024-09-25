@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(String username, String gender, String birthday, Integer age, String role) {
+    public void addUser(String username, String gender, Date birthday, Integer age, String role) {
         User newUser = new User(UUID.randomUUID().toString(), username, gender, birthday, age, role);
         userRepository.addUser(newUser);
     }

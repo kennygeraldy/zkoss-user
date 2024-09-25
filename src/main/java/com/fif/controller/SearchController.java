@@ -61,7 +61,7 @@ public class SearchController extends SelectorComposer<Component> {
         User selected = selection.iterator().next();
         usernameLabel.setValue(selected.getUsername());
         genderLabel.setValue(selected.getGender());
-        birthdayLabel.setValue(selected.getBirthday());
+        birthdayLabel.setValue(selected.getBirthday().toString());
         ageLabel.setValue(selected.getAge().toString());
         roleLabel.setValue(selected.getRole());
     }
