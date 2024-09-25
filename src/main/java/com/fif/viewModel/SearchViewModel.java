@@ -4,23 +4,33 @@ import com.fif.entity.User;
 import com.fif.services.impl.UserServiceImpl;
 import com.fif.services.UserService;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class SearchViewModel {
+    @WireVariable
+    private UserService userService;
 
     private String keyword;
 
-    private List<User> userList = new ListModelList<User>();
+    private List<User> userList;
 
     private User selectedUser;
 
-    private UserService userService = new UserServiceImpl();
+//    private UserService userService = new UserServiceImpl();
 
     private String username;
 
@@ -32,24 +42,45 @@ public class SearchViewModel {
 
     private String role;
 
-    @Command
-    public void search() {
-        userList.clear();
-        userList.addAll(userService.search(keyword));
 
-        UUID.randomUUID().toString();
+
+    @Init
+    public void init() {
+        userList = new ListModelList<>();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            userService.addUser(new User("Kenny Geraldy", "male", sdf.parse("2020-1-8"), 22, "Front-End Developer"));
+//            userService.addUser(new User("Jona Kentyck", "male", sdf.parse("2020-1-8"), 23, "Back-End Developer"));
+//            userService.addUser(new User("Kezia Amelia", "female", sdf.parse("2000-11-2"), 25, "Front-End Developer"));
+//            userService.addUser(new User("Unlocki Dharma", "male", sdf.parse("2010-02-2"), 26, "Front-End Developer"));
+//            userService.addUser(new User("Nathania Coa", "female", sdf.parse("2010-02-2"), 27, "Full-Stack Developer"));
+//        } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        };
+        userList.addAll(userService.getUsers());
     }
 
-    public SearchViewModel() {
-        userList.addAll(userService.findAll());
-    }
+//    public SearchViewModel() {
+//        userList.addAll(userService.getUsers());
+//    }
+//    @Command
+//    public void search() {
+//        userList.clear();
+//        userList.addAll(userService.search(keyword));
+//
+//        UUID.randomUUID().toString();
+//    }
+//
+//    public SearchViewModel() {
+//        userList.addAll(userService.findAll());
+//    }
 
     @Command
     @NotifyChange("userList")
     public void delete() {
         if (selectedUser == null) throw new RuntimeException("Please select a user before delete");
 
-        userService.deleteUser(selectedUser.getId());
+        userService.deleteUser(selectedUser);
         userList.remove(selectedUser);
         selectedUser = null;
 
@@ -59,18 +90,27 @@ public class SearchViewModel {
     @Command
     @NotifyChange("userList")
     public void add() {
-        userService.addUser(username, gender, birthday, age, role);
+        User newUser = new User(username, gender, birthday, age, role);
+        userService.addUser(newUser);
+        userList.add(newUser);
         Executions.sendRedirect("output-table.zul");
-        System.out.println(username);
-        System.out.println(userService);
 
     }
 
     @Command
     @NotifyChange({"userList", "selectedUser"})
     public void update() {
+        if (selectedUser == null) throw new RuntimeException("Please select a user before update");
         userService.updateUser(selectedUser);
         System.out.println(userService);
+    }
+
+    @Command
+    @NotifyChange("personList")
+    public void search() {
+        selectedUser = null;
+        userList.clear();
+        userList.addAll(userService.searchPersonsByKeyword(keyword));
     }
 
     public void setKeyword(String keyword) {

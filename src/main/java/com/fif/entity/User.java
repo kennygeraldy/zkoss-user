@@ -1,23 +1,34 @@
 package com.fif.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+@Entity(name = "User")
+public class User implements Serializable, Cloneable {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String gender;
 
+    @Column(nullable = false)
     private Date birthday;
 
+    @Column(nullable = false)
     private Integer age;
 
+    @Column(nullable = false)
     private String role;
 
-    public User(String id, String username, String gender, Date birthday, Integer age, String role) {
-        this.id = id;
+    public User() {}
+
+    public User(String username, String gender, Date birthday, Integer age, String role) {
         this.username = username;
         this.gender = gender;
         this.birthday = birthday;
@@ -25,7 +36,7 @@ public class User {
         this.role = role;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,7 +60,7 @@ public class User {
         this.role = role;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

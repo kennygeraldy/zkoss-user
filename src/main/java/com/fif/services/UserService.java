@@ -1,18 +1,28 @@
 package com.fif.services;
 
+import com.fif.entity.Log;
 import com.fif.entity.User;
 
 import java.util.Date;
 import java.util.List;
 
 public interface UserService {
-    public List<User> findAll();
 
-    public List<User> search(String keyword);
+    User addUser(User user);
 
-    void deleteUser(String id);
+    List<User> getUsers();
 
-    void addUser(String username, String gender, Date birthday, Integer age, String role);
+    void deleteUser(User user);
 
     void updateUser(User user);
+
+    public List<User> searchPersonsByKeyword(String keyword);
+//
+//    public List<User> search(String keyword);
+//
+//    void deleteUser(Long id);
+//
+//    void addUser(String username, String gender, Date birthday, Integer age, String role);
+//
+//    void updateUser(User user);
 }
