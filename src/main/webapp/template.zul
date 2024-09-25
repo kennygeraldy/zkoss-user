@@ -1,0 +1,82 @@
+<?page title="Template" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <style>
+        .z-window-content {
+        padding: 0;
+        }
+
+        .z-north, .z-south, .z-west, .z-center, .z-east {
+        border: none;
+        }
+
+        .borderlayout {
+        background-color: #f0f4f8;
+        color: white;
+        }
+
+        .north {
+        background-color: #00796b;
+        color: white;
+        padding: 15px;
+        font-size: 1.5rem;
+        }
+
+        .south {
+        background-color: #00796b;
+        padding: 10px;
+        text-align: center;
+        }
+
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e0f7fa;
+        padding: 0;
+        margin: 0;
+        }
+
+        .sidebar {
+        background-color: #ffffff;
+        border-right: 1px solid #00796b;
+        padding: 10px;
+        }
+
+        .sidebar-label {
+        cursor: pointer;
+        font-weight: medium;
+        padding: 10px;
+        font-size: 1rem;
+        display: block;
+        }
+    </style>
+    <window  border="normal" width="100%" height="100%" style="margin: 0;padding:0;">
+        <borderlayout sclass="borderlayout">
+            <north sclass="north">
+                <label value="Welcome to the BO [Booking Opera] Syariah" style="font-size: 20px; font-weight: bold; color: #fff; text-align: left;" />
+            </north>
+            <west width="200px" sclass="sidebar">
+                <vbox>
+                    <label sclass="sidebar-label" value="Navigation" style="font-weight: bold; padding: 10px; font-size: 1.5rem;" />
+                    <a href="https://fifgroup.co.id/" sclass="sidebar-label" style="text-decoration: none; color: #00796b;">Home</a>
+                    <a onClick='loadContent("registration.zul")' sclass="sidebar-label" style="text-decoration: none; color: #00796b;">Registration</a>
+                    <a onClick='loadContent("output-table.zul")' sclass="sidebar-label" style="text-decoration: none; color: #00796b;">Users Booklet</a>
+                    <a onClick='loadContent("help.zul")' sclass="sidebar-label" style="text-decoration: none; color: #00796b;">Help</a>
+                </vbox>
+            </west>
+<!--            <center autoscroll="true">-->
+<!--                <div id="centerContent" width="100%" height="100%">-->
+<!--                    <include id="contentLoader" src="registration.zul" />-->
+<!--                </div>-->
+<!--            </center>-->
+            <center autoscroll="true" self="@insert(content)">
+            </center>
+            <south sclass="south">
+                <label value="© 2024 by KGeraldy. All rights reserved." style="font-size: 0.9rem; color: white;" />
+            </south>
+        </borderlayout>
+        <zscript><![CDATA[
+            void loadContent(String zulFile) {
+              Executions.sendRedirect(zulFile);
+            }
+        ]]></zscript>
+    </window>
+</zk>

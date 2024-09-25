@@ -1,0 +1,6 @@
+com\fif\entity\User.class
+com\fif\services\impl\UserServiceImpl.class
+com\fif\repository\UserRepository.class
+com\fif\controller\SearchController.class
+com\fif\viewModel\SearchViewModel.class
+com\fif\services\UserService.class
