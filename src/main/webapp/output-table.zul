@@ -1,3 +1,4 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
 <zk>
     <style>
         body {
@@ -70,7 +71,7 @@
         color: pink;
         }
     </style>
-    <window title="Users Booklet" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">
+    <window title="Users Booklet" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-right: 25vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')" self="@define(content)">
         <textbox id="keywordBox" width="70%" height="5vh" style="margin-right: 5px; margin-bottom: 2vh;" value="@bind(vm.keyword)" />
         <button id="searchButton" label="Search" iconSclass="z-icon-search" height="5vh" style="margin-bottom: 2vh;margin-right: 5px" onClick="@command('search')" />
         <button id="deleteButton" label="Delete" iconSclass="z-icon-trash" height="5vh" style="margin-bottom: 2vh" onClick="@command('delete')" />
@@ -98,11 +99,18 @@
 
         <hlayout style="margin-top:20px; width:100%">
             <vlayout hflex="1">
-                <label value="@load(vm.selectedUser.username)" />
-                <label value="@load(vm.selectedUser.gender)" />
-                <label value="@load(vm.selectedUser.birthday)" />
-                <label value="@load(vm.selectedUser.age)" />
-                <label value="@load(vm.selectedUser.role)" />
+                <div style="display:flex; justify-content:center; align-items: center; gap: 10px">
+                <label style="text-align: center; font-weight: bold;">Update User - </label>
+                    <label value="Username: " />
+                    <textbox value="@bind(vm.selectedUser.username)" />
+                    <label value="Age: " />
+                    <textbox value="@bind(vm.selectedUser.age)" />
+                    <label value="Role: " />
+                    <textbox value="@bind(vm.selectedUser.role)" />
+                    <label value="Birthday: " />
+                    <textbox value="@bind(vm.selectedUser.birthday)" />
+                    <button onClick="@command('update')">Update</button>
+                </div>
             </vlayout>
         </hlayout>
     </window>

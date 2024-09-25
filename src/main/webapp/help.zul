@@ -1,3 +1,4 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
 <zk>
     <style>
         .borderlayout {
@@ -42,7 +43,7 @@
         display: block;
         }
     </style>
-        <window title="HELP" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;">
+        <window title="HELP" border="normal" hflex="min" width="500px" style="margin-top: 5vh; margin-left: 30vh; margin-right: 30vh;" self="@define(content)">
             <div style="display:flex; flex-direction: column;">
 
             <listbox id="box" onClick='showAnswer(event)'>

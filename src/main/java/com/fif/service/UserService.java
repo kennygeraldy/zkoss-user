@@ -14,4 +14,6 @@ public interface UserService {
     void deleteUser(String id);
 
     void addUser(String username, String gender, String birthday, Integer age, String role);
+
+    void updateUser(User user);
 }

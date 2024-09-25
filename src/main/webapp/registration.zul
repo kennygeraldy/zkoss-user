@@ -1,4 +1,4 @@
-<!--<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>-->
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
 <?page title="Registration Form" contentType="text/html;charset=UTF-8"?>
 <zk>
     <style>
@@ -72,8 +72,8 @@
         color: pink;
         }
     </style>
-<!--    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" self="@define(content)"> adding self define content to show the content in parent template-->
-    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">
+    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" self="@define(content)" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">
+<!--    <window title="Registration Form" border="normal" width="500px" hflex="min" closable="false" style="margin-top: 5vh; margin-left: 20vh; margin-right: 40vh;" viewModel="@id('vm') @init('com.fif.viewModel.SearchViewModel')">-->
         <grid>
             <auxhead>
                 <auxheader label="Registration Form" colspan="2" iconSclass="z-icon-user-circle-o"/>

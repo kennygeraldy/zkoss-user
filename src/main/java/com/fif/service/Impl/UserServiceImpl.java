@@ -45,4 +45,18 @@ public class UserServiceImpl implements UserService {
         userRepository.addUser(newUser);
     }
 
+    @Override
+    public void updateUser(User updatedUser) {
+        userRepository.findAll().stream()
+                .filter(user -> user.getId().equals(updatedUser.getId()))
+                .findFirst()
+                .ifPresent(existingUser -> {
+                    existingUser.setUsername(updatedUser.getUsername());
+                    existingUser.setGender((updatedUser.getGender()));
+                    existingUser.setAge(updatedUser.getAge());
+                    existingUser.setBirthday(updatedUser.getBirthday());
+                    existingUser.setRole(updatedUser.getRole());
+                });
+    }
+
 }

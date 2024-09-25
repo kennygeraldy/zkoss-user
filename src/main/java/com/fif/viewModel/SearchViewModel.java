@@ -5,6 +5,7 @@ import com.fif.service.Impl.UserServiceImpl;
 import com.fif.service.UserService;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.ListModelList;
 
 import java.util.List;
@@ -58,9 +59,17 @@ public class SearchViewModel {
     @NotifyChange("userList")
     public void add() {
         userService.addUser(username, gender, birthday, age, role);
+        Executions.sendRedirect("output-table.zul");
         System.out.println(username);
         System.out.println(userService);
 
+    }
+
+    @Command
+    @NotifyChange({"userList", "selectedUser"})
+    public void update() {
+        userService.updateUser(selectedUser);
+        System.out.println(userService);
     }
 
     public void setKeyword(String keyword) {
