@@ -1,23 +1,16 @@
 package com.fif.viewModel;
 
 import com.fif.entity.User;
-import com.fif.services.impl.UserServiceImpl;
 import com.fif.services.UserService;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
-import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class SearchViewModel {
@@ -29,8 +22,6 @@ public class SearchViewModel {
     private List<User> userList;
 
     private User selectedUser;
-
-//    private UserService userService = new UserServiceImpl();
 
     private String username;
 
@@ -46,6 +37,7 @@ public class SearchViewModel {
 
     @Init
     public void init() {
+        keyword = "";
         userList = new ListModelList<>();
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        try {
@@ -59,21 +51,6 @@ public class SearchViewModel {
 //        };
         userList.addAll(userService.getUsers());
     }
-
-//    public SearchViewModel() {
-//        userList.addAll(userService.getUsers());
-//    }
-//    @Command
-//    public void search() {
-//        userList.clear();
-//        userList.addAll(userService.search(keyword));
-//
-//        UUID.randomUUID().toString();
-//    }
-//
-//    public SearchViewModel() {
-//        userList.addAll(userService.findAll());
-//    }
 
     @Command
     @NotifyChange("userList")

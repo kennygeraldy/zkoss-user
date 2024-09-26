@@ -17,12 +17,4 @@ public interface UserService {
     void updateUser(User user);
 
     public List<User> searchPersonsByKeyword(String keyword);
-//
-//    public List<User> search(String keyword);
-//
-//    void deleteUser(Long id);
-//
-//    void addUser(String username, String gender, Date birthday, Integer age, String role);
-//
-//    void updateUser(User user);
 }

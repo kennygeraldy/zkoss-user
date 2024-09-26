@@ -45,7 +45,7 @@ public class UserRepository {
     @Transactional
     public void delete(User user) {
         User r = get(user.getId());
-        if(r != null) {
+        if (r != null) {
             em.remove(r);
         }
     }
@@ -53,14 +53,14 @@ public class UserRepository {
     @Transactional
     public void update(User user) {
         User existingUser = get(user.getId());
-            existingUser.setUsername(user.getUsername());
-            existingUser.setGender(user.getGender());
-            existingUser.setBirthday(user.getBirthday());
-            existingUser.setAge(user.getAge());
-            existingUser.setRole(user.getRole());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setGender(user.getGender());
+        existingUser.setBirthday(user.getBirthday());
+        existingUser.setAge(user.getAge());
+        existingUser.setRole(user.getRole());
 
-            em.merge(existingUser);
-            em.flush();
+        em.merge(existingUser);
+        em.flush();
     }
 
     @Transactional(readOnly = true)
@@ -69,28 +69,6 @@ public class UserRepository {
         Query query = em.createQuery(searchQuery);
         query.setParameter("keyword", "%" + keyword + "%");
         List<User> res = query.getResultList();
-        return res;}
-
-//    public static List<User> users = new ArrayList<User>();
-//
-//    static {
-//    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            users.add(new User(1L, "Kenny Geraldy", "male", sdf.parse("2020-1-8"), 22, "Front-End Developer"));
-//            users.add(new User(2L, "Jona Kentyck", "male", sdf.parse("2020-1-8"), 23, "Back-End Developer"));
-//            users.add(new User(3L, "Kezia Amelia", "female", sdf.parse("2000-11-2"), 25, "Front-End Developer"));
-//            users.add(new User(4L, "Unlocki Dharma", "male", sdf.parse("2010-02-2"), 26, "Front-End Developer"));
-//            users.add(new User(5L, "Nathania Coa", "female", sdf.parse("2010-02-2"), 27, "Full-Stack Developer"));
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        };
-//    }
-//
-//    public List<User> findAll() {
-//        return users;
-//    }
-//
-//    public void addUser(User user) {
-//        users.add(user);
-//    }
+        return res;
+    }
 }
