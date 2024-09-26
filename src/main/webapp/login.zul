@@ -61,7 +61,7 @@
         }
     </style>
 
-    <window title="Login" sclass="login-window" width="350px" closable="false" position="center" style="margin-left: 40vw; margin-right:10vw; margin-top: 20vh;">
+    <window title="Login Form" sclass="login-window" width="350px" closable="false" position="center" style="margin-left: 40vw; margin-right:10vw; margin-top: 20vh;">
         <vlayout spacing="10px" hflex="min" vflex="min">
             <label value="Login" sclass="form-title"/>
 
