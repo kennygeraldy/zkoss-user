@@ -1,0 +1,51 @@
+<zk>
+    <style>
+        .forbidden-window {
+        width: 350px;
+        padding: 20px;
+        margin: 150px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        }
+
+        .forbidden-window .title-label {
+        font-size: 20px;
+        font-weight: 500;
+        color: red;
+        margin-bottom: 10px;
+        }
+
+        .forbidden-window .message-label {
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-bottom: 20px;
+        }
+
+        .forbidden-window a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: transparent;
+        color: #2c3e50;
+        text-decoration: none;
+        border: 1px solid #2c3e50;
+        border-radius: 4px;
+        font-size: 14px;
+        }
+
+        .forbidden-window a:hover {
+        background-color: #2c3e50;
+        color: #ffffff;
+        }
+    </style>
+
+    <window title="Forbidden" sclass="forbidden-window" closable="false" border="normal" mode="modal">
+        <div style="display:flex; flex-direction: column; gap:5px;">
+            <label sclass="title-label">Access Denied</label>
+            <label sclass="message-label">You don't have permission to view this page.</label>
+            <a href="/logout" label="Back" />
+        </div>
+    </window>
+</zk>

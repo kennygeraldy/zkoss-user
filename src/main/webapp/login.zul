@@ -1,0 +1,81 @@
+<zk xmlns:h="native">
+    <style>
+        .login-window {
+        background-color: #FFFFFF;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 40px 30px;
+        }
+
+        .login-window .form-title {
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        }
+
+        .login-window .form-label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        }
+
+        .login-window .textbox {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+        transition: border-color 0.3s;
+        }
+
+        .login-window .textbox:focus {
+        border-color: #007BFF;
+        background-color: #fff;
+        }
+
+        .login-window .submit-button {
+        background-color: #007BFF;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        .login-window .submit-button:hover {
+        background-color: #0056b3;
+        }
+
+        .login-window .error-label {
+        color: red;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 12px;
+        }
+    </style>
+
+    <window title="Login" sclass="login-window" width="350px" closable="false" position="center" style="margin-left: 40vw; margin-right:10vw; margin-top: 20vh;">
+        <vlayout spacing="10px" hflex="min" vflex="min">
+            <label value="Login" sclass="form-title"/>
+
+            <h:form action="${pageContext.request.contextPath}/login.zul" method="POST">
+                <label value="Username" sclass="form-label"/>
+                <textbox name="username" hflex="1" placeholder="Enter username" sclass="textbox"/>
+
+                <label value="Password" sclass="form-label"/>
+                <textbox name="password" type="password" hflex="1" placeholder="Enter password" sclass="textbox"/>
+
+                <button type="submit" label="Login" sclass="submit-button"/>
+            </h:form>
+
+            <label value="Invalid username or password" sclass="error-label" visible="${param.error != null}"/>
+        </vlayout>
+    </window>
+</zk>
